@@ -12,10 +12,23 @@ const resolvers = {
         reviews() {
             return db.reviews
         },
-        author() {
+        authors() {
             return db.authors
         },
+        review(_parent, args, _context) {
+            return db.reviews.find((item) => item.id === args.id)
+        },
+        game(_parent, args, _content) {
+            return findSingleItem(db.games, id)
+        },
+        author(_parent, { id }, _content) {
+            return findSingleItem(db.authors, args.id)
+        },
     },
+}
+
+const findSingleItem = (items, id) => {
+    return items.find((item) => item.id === id)
 }
 
 // server setup

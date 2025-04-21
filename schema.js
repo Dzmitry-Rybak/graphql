@@ -20,8 +20,12 @@ export const typeDefs = `#graphql
     # type Query - every graphql schema needs to have
     type Query {
         reviews: [Review]
+        # Query variable: id: ID!
+        review(id: ID!): Review
         games: [Game]
-        author: [Author]
+        game(id: ID!): Game
+        authors: [Author]
+        author(id: ID!): Author
     }
 `
 
