@@ -31,6 +31,22 @@ export const typeDefs = `#graphql
         authors: [Author]
         author(id: ID!): Author
     }
-`
 
-// int, float, string, boolean, ID
+    # defined how users can mutate (add, delete, update) data.
+    type Mutation {
+        deleteGame(id: ID!): [Game]
+        addGame(game: AddGameInput!): Game
+        updateGame(id: ID!, edits: EditGameInput!): Game
+    }
+
+    # for the multiply arguments
+    input AddGameInput {
+        title: String!,
+        platform: [String!]!
+    }
+    
+    input EditGameInput {
+        title: String,
+        platform: [String!]
+    }
+`
