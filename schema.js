@@ -13,13 +13,15 @@ export const typeDefs = `#graphql
 
     type Author {
         id: ID!
-        name: String!;
+        name: String!
         verified: Boolean!
     }
 
     # type Query - every graphql schema needs to have
     type Query {
-        reviews: [Reviews]
+        reviews: [Review]
+        games: [Game]
+        author: [Author]
     }
 `
 
