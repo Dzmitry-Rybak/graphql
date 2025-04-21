@@ -19,10 +19,34 @@ const resolvers = {
             return db.reviews.find((item) => item.id === args.id)
         },
         game(_parent, args, _content) {
-            return findSingleItem(db.games, id)
+            return findSingleItem(db.games, args.id)
         },
         author(_parent, { id }, _content) {
-            return findSingleItem(db.authors, args.id)
+            return findSingleItem(db.authors, id)
+        },
+    },
+
+    // for the "type Game -> reviews"
+    Game: {
+        // id: () => 'qqq', - will hardcode id as 'qqq' for Game
+        reviews(parent) {
+            return db.reviews.filter((item) => item.game_id === parent.id)
+        },
+    },
+
+    // for the "type Author -> reviews"
+    Author: {
+        reviews(parent) {
+            return db.reviews.filter((review) => review.id === parent.id)
+        },
+    },
+
+    Review: {
+        game(parent) {
+            return db.games.find((item) => item.id === parent.game_id)
+        },
+        author(parent) {
+            return db.authors.find((item) => item.id === parent.author_id)
         },
     },
 }
